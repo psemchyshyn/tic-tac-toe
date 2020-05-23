@@ -22,10 +22,10 @@ class Btree:
         Finds the best move for computer player
         '''
         best_move = None
-        case_move = 1
+        case_move = 10
         # Traversing through all positions applying minimax algorithm to each one of them
         for move in self._root.state.get_free_positions():
-            self._root.state.set_move(move, "X")
+            self._root.state.set_move(move, "O")
             score = minimax(self._root)
             if score < case_move:
                 case_move = score
@@ -35,6 +35,9 @@ class Btree:
 
 
 def minimax(root, play=Btree.MAXIMIXER):
+    '''
+    Implementing minmax algorithm for computer player in tic tac toe
+    '''
     # Check condition for finishing tree deploying
     if root.state.check_for_winning() == "win":
         return -play
@@ -49,12 +52,12 @@ def minimax(root, play=Btree.MAXIMIXER):
         # Maximizer is trying to get the highest score
         optimal_move = Btree.MINIMIZER
         
-        new_state = root.state.get_random_move("O")
+        new_state = root.state.get_random_move("X")
         root.left = BNode(new_state)
         optimal_move = max(optimal_move, minimax(root.left, play=Btree.MINIMIZER))
 
         if not new_state.is_full():
-            new_state = new_state.get_random_move("O")
+            new_state = new_state.get_random_move("X")
             root.right = BNode(new_state)
             optimal_move = max(optimal_move, minimax(root.right, play=Btree.MINIMIZER))
         return optimal_move
@@ -62,12 +65,12 @@ def minimax(root, play=Btree.MAXIMIXER):
         # Minimizer is trying to get the lowest score
         optimal_move = Btree.MAXIMIXER
 
-        new_state = root.state.get_random_move("X")
+        new_state = root.state.get_random_move("O")
         root.left = BNode(new_state)
         optimal_move = min(optimal_move, minimax(root.left, play=Btree.MAXIMIXER))
 
         if not new_state.is_full():
-            new_state = new_state.get_random_move("X")
+            new_state = new_state.get_random_move("O")
             root.right = BNode(new_state)
             optimal_move = min(optimal_move, minimax(root.right, play=Btree.MAXIMIXER))
         return optimal_move
