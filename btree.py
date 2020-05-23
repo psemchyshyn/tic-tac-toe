@@ -2,13 +2,12 @@
 Binary tree / minimax algorithm
 '''
 
-import random
 
-from board import Board
 from bnode import BNode
 
 
 class Btree:
+    '''Represents game tree of moves'''
     MAXIMIXER = 1
     DRAW = 0
     MINIMIZER = -1
@@ -51,7 +50,7 @@ def minimax(root, play=Btree.MAXIMIXER):
     if play == Btree.MAXIMIXER:
         # Maximizer is trying to get the highest score
         optimal_move = Btree.MINIMIZER
-        
+
         new_state = root.state.get_random_move("X")
         root.left = BNode(new_state)
         optimal_move = max(optimal_move, minimax(root.left, play=Btree.MINIMIZER))
@@ -74,4 +73,3 @@ def minimax(root, play=Btree.MAXIMIXER):
             root.right = BNode(new_state)
             optimal_move = min(optimal_move, minimax(root.right, play=Btree.MAXIMIXER))
         return optimal_move
-

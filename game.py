@@ -1,10 +1,11 @@
 '''Main module for deploying the game'''
 
 import re
-
-from btree import Btree, minimax
-from board import Board
 from itertools import cycle
+
+
+from btree import Btree
+from board import Board
 
 class Game:
     '''Represents Game class for Tic Tac Toe'''
@@ -74,4 +75,3 @@ class Game:
 if __name__ == "__main__":
     game = Game()
     game.run()
-

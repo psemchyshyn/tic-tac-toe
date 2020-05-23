@@ -21,7 +21,7 @@ class Board:
         if any(set(row) == {self.last_symbol} for row in self.state) or \
         any(set(col) == {self.last_symbol} for col in zip(*self.state)) or \
         self.state[0][0] == self.state[1][1] == self.state[2][2] != " " or \
-        self.state[2][0] == self.state[1][1] == self.state[0][2]!= " " :
+        self.state[2][0] == self.state[1][1] == self.state[0][2] != " ":
             return "win"
         elif self.is_full():
             return "draw"
@@ -30,7 +30,7 @@ class Board:
 
     def get_free_positions(self):
         '''
-        Gets all free positions to make a move on the 
+        Gets all free positions to make a move on the
         board
         '''
         available_positions = []
@@ -95,10 +95,3 @@ class Board:
                 string += element
             string += "\n"
         return string
-
-# a = Board()
-# a.set_move((1, 1), "X")
-# a.set_move((1, 0), "Y")
-# a.set_move((0, 0), "X")
-# print(a)
-
